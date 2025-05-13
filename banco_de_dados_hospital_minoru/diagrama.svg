@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <style>
+    .entity { fill: #f5f5f5; stroke: #333; stroke-width: 2; }
+    .attribute { font-family: Arial, sans-serif; font-size: 12px; }
+    .primary-key { font-weight: bold; }
+    .foreign-key { font-style: italic; }
+    .relationship { stroke: #333; stroke-width: 2; fill: none; }
+    .label { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+    .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #333; }
+  </style>
+  
+  <text x="400" y="30" text-anchor="middle" class="title">Diagrama do Banco de Dados Gestão Hospitalar</text>
+  
+  <!-- gh_tblGeneros -->
+  <rect x="50" y="80" width="200" height="100" rx="5" class="entity" />
+  <text x="150" y="100" text-anchor="middle" class="attribute" font-weight="bold">gh_tblGeneros</text>
+  <line x1="50" y1="110" x2="250" y2="110" stroke="#333" stroke-width="1" />
+  <text x="60" y="130" class="attribute primary-key">id_genero INT PK</text>
+  <text x="60" y="150" class="attribute">descricao VARCHAR(30)</text>
+  <text x="60" y="170" class="attribute">data_cadastro DATETIME</text>
+  
+  <!-- gh_tblPacientes -->
+  <rect x="300" y="80" width="200" height="140" rx="5" class="entity" />
+  <text x="400" y="100" text-anchor="middle" class="attribute" font-weight="bold">gh_tblPacientes</text>
+  <line x1="300" y1="110" x2="500" y2="110" stroke="#333" stroke-width="1" />
+  <text x="310" y="130" class="attribute primary-key">id_paciente INT PK</text>
+  <text x="310" y="150" class="attribute">nome VARCHAR(20)</text>
+  <text x="310" y="170" class="attribute">sobrenome VARCHAR(30)</text>
+  <text x="310" y="190" class="attribute">data_nascimento DATE</text>
+  <text x="310" y="210" class="attribute foreign-key">id_genero INT FK</text>
+  
+  <!-- gh_tblMedicos -->
+  <rect x="550" y="80" width="200" height="140" rx="5" class="entity" />
+  <text x="650" y="100" text-anchor="middle" class="attribute" font-weight="bold">gh_tblMedicos</text>
+  <line x1="550" y1="110" x2="750" y2="110" stroke="#333" stroke-width="1" />
+  <text x="560" y="130" class="attribute primary-key">id_medico INT PK</text>
+  <text x="560" y="150" class="attribute">nome VARCHAR(20)</text>
+  <text x="560" y="170" class="attribute">sobrenome VARCHAR(30)</text>
+  <text x="560" y="190" class="attribute">crm INT</text>
+  <text x="560" y="210" class="attribute">uf CHAR(2)</text>
+  
+  <!-- gh_tblExames -->
+  <rect x="300" y="300" width="200" height="140" rx="5" class="entity" />
+  <text x="400" y="320" text-anchor="middle" class="attribute" font-weight="bold">gh_tblExames</text>
+  <line x1="300" y1="330" x2="500" y2="330" stroke="#333" stroke-width="1" />
+  <text x="310" y="350" class="attribute primary-key">id_exame INT PK</text>
+  <text x="310" y="370" class="attribute foreign-key">id_paciente INT FK</text>
+  <text x="310" y="390" class="attribute foreign-key">id_medico INT FK</text>
+  <text x="310" y="410" class="attribute">diagnostico TEXT</text>
+  <text x="310" y="430" class="attribute">data_exame DATETIME</text>
+  
+  <!-- gh_tblProntuarios -->
+  <rect x="50" y="300" width="200" height="120" rx="5" class="entity" />
+  <text x="150" y="320" text-anchor="middle" class="attribute" font-weight="bold">gh_tblProntuarios</text>
+  <line x1="50" y1="330" x2="250" y2="330" stroke="#333" stroke-width="1" />
+  <text x="60" y="350" class="attribute primary-key">id_prontuario INT PK</text>
+  <text x="60" y="370" class="attribute foreign-key">id_paciente INT FK</text>
+  <text x="60" y="390" class="attribute">descricao TEXT</text>
+  <text x="60" y="410" class="attribute">data_cadastro DATETIME</text>
+  
+  <!-- Relacionamentos -->
+  <!-- Generos -> Pacientes -->
+  <path d="M 250 130 L 275 130 L 275 180 L 300 180" class="relationship" marker-end="url(#arrowhead)" />
+  <text x="270" y="120" class="label">1</text>
+  <text x="290" y="170" class="label">N</text>
+  
+  <!-- Pacientes -> Prontuarios -->
+  <path d="M 400 220 L 400 250 L 150 250 L 150 300" class="relationship" marker-end="url(#arrowhead)" />
+  <text x="410" y="240" class="label">1</text>
+  <text x="160" y="290" class="label">N</text>
+  
+  <!-- Pacientes -> Exames -->
+  <path d="M 400 220 L 400 300" class="relationship" marker-end="url(#arrowhead)" />
+  <text x="410" y="240" class="label">1</text>
+  <text x="410" y="290" class="label">N</text>
+  
+  <!-- Medicos -> Exames -->
+  <path d="M 650 220 L 650 250 L 400 250 L 400 300" class="relationship" marker-end="url(#arrowhead)" />
+  <text x="660" y="240" class="label">1</text>
+  <text x="410" y="290" class="label">N</text>
+  
+  <!-- Definição de marcadores -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+</svg>
