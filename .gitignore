@@ -1,0 +1,13 @@
+# Ignorar arquivos temporários
+*.log
+*.tmp
+
+# Ignorar a pasta de dependências do Node.js
+node_modules/
+
+# Ignorar arquivos de configuração do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar a pasta de configurações do VS Code
+.vscode/
