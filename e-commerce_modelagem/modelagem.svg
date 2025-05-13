@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Definição de estilos -->
+    <defs>
+      <filter id="shadow" x="-2" y="-2" width="110%" height="110%">
+        <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+      </filter>
+    </defs>
+    
+    <!-- Entidade Produto -->
+    <rect x="50" y="150" width="160" height="180" rx="5" fill="#e6f7ff" stroke="#1890ff" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="50" y="150" width="160" height="30" rx="5" fill="#1890ff" stroke="#1890ff" stroke-width="2"/>
+    <text x="130" y="170" font-family="Arial" font-size="14" text-anchor="middle" fill="white" font-weight="bold">PRODUTO</text>
+    <text x="60" y="195" font-family="Arial" font-size="12" fill="#333">PK: id_produto (INT)</text>
+    <text x="60" y="215" font-family="Arial" font-size="12" fill="#333">nome (VARCHAR(100))</text>
+    <text x="60" y="235" font-family="Arial" font-size="12" fill="#333">descricao (TEXT)</text>
+    <text x="60" y="255" font-family="Arial" font-size="12" fill="#333">preco (DECIMAL(10,2))</text>
+    <text x="60" y="275" font-family="Arial" font-size="12" fill="#333">estoque (INT)</text>
+    <text x="60" y="295" font-family="Arial" font-size="12" fill="#333">categoria (VARCHAR(50))</text>
+    
+    <!-- Entidade Comprador -->
+    <rect x="50" y="380" width="160" height="160" rx="5" fill="#f6ffed" stroke="#52c41a" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="50" y="380" width="160" height="30" rx="5" fill="#52c41a" stroke="#52c41a" stroke-width="2"/>
+    <text x="130" y="400" font-family="Arial" font-size="14" text-anchor="middle" fill="white" font-weight="bold">COMPRADOR</text>
+    <text x="60" y="425" font-family="Arial" font-size="12" fill="#333">PK: id_comprador (INT)</text>
+    <text x="60" y="445" font-family="Arial" font-size="12" fill="#333">nome (VARCHAR(100))</text>
+    <text x="60" y="465" font-family="Arial" font-size="12" fill="#333">email (VARCHAR(100))</text>
+    <text x="60" y="485" font-family="Arial" font-size="12" fill="#333">endereco (VARCHAR(255))</text>
+    <text x="60" y="505" font-family="Arial" font-size="12" fill="#333">telefone (VARCHAR(20))</text>
+    
+    <!-- Entidade Pedido -->
+    <rect x="320" y="380" width="160" height="140" rx="5" fill="#fff7e6" stroke="#fa8c16" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="320" y="380" width="160" height="30" rx="5" fill="#fa8c16" stroke="#fa8c16" stroke-width="2"/>
+    <text x="400" y="400" font-family="Arial" font-size="14" text-anchor="middle" fill="white" font-weight="bold">PEDIDO</text>
+    <text x="330" y="425" font-family="Arial" font-size="12" fill="#333">PK: id_pedido (INT)</text>
+    <text x="330" y="445" font-family="Arial" font-size="12" fill="#333">data_pedido (DATETIME)</text>
+    <text x="330" y="465" font-family="Arial" font-size="12" fill="#333">status (VARCHAR(20))</text>
+    <text x="330" y="485" font-family="Arial" font-size="12" fill="#333">FK: id_comprador (INT)</text>
+    
+    <!-- Entidade Item_Pedido -->
+    <rect x="320" y="160" width="160" height="160" rx="5" fill="#f9f0ff" stroke="#722ed1" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="320" y="160" width="160" height="30" rx="5" fill="#722ed1" stroke="#722ed1" stroke-width="2"/>
+    <text x="400" y="180" font-family="Arial" font-size="14" text-anchor="middle" fill="white" font-weight="bold">ITEM_PEDIDO</text>
+    <text x="330" y="205" font-family="Arial" font-size="12" fill="#333">PK: id_item (INT)</text>
+    <text x="330" y="225" font-family="Arial" font-size="12" fill="#333">quantidade (INT)</text>
+    <text x="330" y="245" font-family="Arial" font-size="12" fill="#333">preco_unitario (DEC)</text>
+    <text x="330" y="265" font-family="Arial" font-size="12" fill="#333">FK: id_pedido (INT)</text>
+    <text x="330" y="285" font-family="Arial" font-size="12" fill="#333">FK: id_produto (INT)</text>
+    
+    <!-- Entidade Pagamento -->
+    <rect x="590" y="380" width="160" height="160" rx="5" fill="#fff2f0" stroke="#ff4d4f" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="590" y="380" width="160" height="30" rx="5" fill="#ff4d4f" stroke="#ff4d4f" stroke-width="2"/>
+    <text x="670" y="400" font-family="Arial" font-size="14" text-anchor="middle" fill="white" font-weight="bold">PAGAMENTO</text>
+    <text x="600" y="425" font-family="Arial" font-size="12" fill="#333">PK: id_pagamento (INT)</text>
+    <text x="600" y="445" font-family="Arial" font-size="12" fill="#333">data_pagamento (DT)</text>
+    <text x="600" y="465" font-family="Arial" font-size="12" fill="#333">valor_pago (DEC)</text>
+    <text x="600" y="485" font-family="Arial" font-size="12" fill="#333">metodo_pagamento (VAR)</text>
+    <text x="600" y="505" font-family="Arial" font-size="12" fill="#333">FK: id_pedido (INT)</text>
+    
+    <!-- Relações -->
+    <!-- Comprador - Pedido -->
+    <line x1="210" y1="440" x2="320" y2="440" stroke="#52c41a" stroke-width="2"/>
+    <text x="265" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1</text>
+    <text x="315" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">N</text>
+    
+    <!-- Pedido - Pagamento -->
+    <line x1="480" y1="440" x2="590" y2="440" stroke="#fa8c16" stroke-width="2"/>
+    <text x="535" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1</text>
+    <text x="585" y="430" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1</text>
+    
+    <!-- Pedido - Item_Pedido -->
+    <line x1="400" y1="380" x2="400" y2="320" stroke="#fa8c16" stroke-width="2"/>
+    <text x="390" y="370" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1</text>
+    <text x="390" y="330" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">N</text>
+    
+    <!-- Produto - Item_Pedido -->
+    <line x1="210" y1="240" x2="320" y2="240" stroke="#1890ff" stroke-width="2"/>
+    <text x="265" y="230" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">1</text>
+    <text x="315" y="230" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">N</text>
+    
+    <!-- Título -->
+    <text x="400" y="60" font-family="Arial" font-size="20" text-anchor="middle" fill="#333" font-weight="bold">Diagrama ER - Plataforma de E-commerce</text>
+    <text x="400" y="85" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Modelo Lógico com Relacionamentos</text>
+  </svg>
