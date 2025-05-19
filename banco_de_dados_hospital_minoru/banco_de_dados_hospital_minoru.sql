@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS gh_tblProntuarios (
     data_cadastro DATETIME
 );
 
+USE gestao_hospitalar;
 -- Aula 02: Relacionamentos e Inserções
 
 -- Relacionamentos (chaves estrangeiras)
@@ -75,6 +76,7 @@ REFERENCES gh_tblMedicos(id_medico);
 -- Inserção de dados iniciais
 
 -- Inserção de gêneros
+USE gestao_hospitalar;
 INSERT INTO gh_tblGeneros (descricao, data_cadastro) 
 VALUES ('Masculino', NOW()), ('Feminino', NOW());
 
