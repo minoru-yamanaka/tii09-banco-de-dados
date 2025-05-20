@@ -11012,3 +11012,14 @@ SELECT produto, preco_unidade FROM produtos order by preco_unidade desc;
 
 SELECT * FROM produtos ORDER BY preco_unidade DESC LIMIT 1;
 
+SELECT * FROM clientes where cidade = "Lisboa";
+
+SELECT * FROM clientes where sexo = "m" && cidade = "Lisboa";
+
+SELECT * FROM clientes where sexo = "m" AND cidade = "Lisboa";
+
+SELECT * FROM produtos WHERE preco_unidade >= 1;
+
+SELECT * FROM produtos WHERE preco_unidade >= 1 AND preco_unidade <= 2;
+
+SELECT nome, email, cidade FROM clientes where cidade = "Paris" OR sexo="m";
