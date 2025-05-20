@@ -51,7 +51,6 @@ USE escola;
 SELECT nome, cidade FROM alunos where cidade = "São Paulo";
 
 -- 5. Ordenar os alunos em ordem crescente de idade.
-
 USE escola;
 SELECT nome, idade FROM alunos order by idade asc;
 
