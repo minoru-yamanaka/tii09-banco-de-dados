@@ -16,7 +16,7 @@ USE gestao_hospitalar;
 CREATE TABLE IF NOT EXISTS gh_tblGeneros (
     id_genero INT AUTO_INCREMENT PRIMARY KEY,
     descricao VARCHAR(30) NOT NULL,
-    data_cadastro DATETIME
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS gh_tblPacientes (
@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS gh_tblPacientes (
     sobrenome VARCHAR(30) NOT NULL,
     data_nascimento DATE NOT NULL,
     id_genero INT NOT NULL,
-    data_cadastro DATETIME
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_genero) REFERENCES gh_tblGeneros(id_genero)
 );
 
 CREATE TABLE IF NOT EXISTS gh_tblMedicos (
@@ -34,7 +35,7 @@ CREATE TABLE IF NOT EXISTS gh_tblMedicos (
     sobrenome VARCHAR(30) NOT NULL,
     crm INT NOT NULL,
     uf CHAR(2) NOT NULL,
-    data_cadastro DATETIME
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS gh_tblExames (
@@ -43,78 +44,62 @@ CREATE TABLE IF NOT EXISTS gh_tblExames (
     id_medico INT NOT NULL,
     diagnostico TEXT,
     data_exame DATETIME,
-    data_cadastro DATETIME
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_paciente) REFERENCES gh_tblPacientes(id_paciente),
+    FOREIGN KEY (id_medico) REFERENCES gh_tblMedicos(id_medico)
 );
 
 CREATE TABLE IF NOT EXISTS gh_tblProntuarios (
     id_prontuario INT AUTO_INCREMENT PRIMARY KEY,
     id_paciente INT NOT NULL,
     descricao TEXT NOT NULL,
-    data_cadastro DATETIME
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_paciente) REFERENCES gh_tblPacientes(id_paciente)
 );
 
-USE gestao_hospitalar;
--- Aula 02: Relacionamentos e Inserções
-
--- Relacionamentos (chaves estrangeiras)
-ALTER TABLE gh_tblPacientes 
-ADD FOREIGN KEY (id_genero) 
-REFERENCES gh_tblGeneros(id_genero);
-
-ALTER TABLE gh_tblProntuarios 
-ADD FOREIGN KEY (id_paciente) 
-REFERENCES gh_tblPacientes(id_paciente);
-
-ALTER TABLE gh_tblExames 
-ADD FOREIGN KEY (id_paciente) 
-REFERENCES gh_tblPacientes(id_paciente);
-
-ALTER TABLE gh_tblExames 
-ADD FOREIGN KEY (id_medico) 
-REFERENCES gh_tblMedicos(id_medico);
-
--- Inserção de dados iniciais
+-- Aula 02: Inserções
 
 -- Inserção de gêneros
-USE gestao_hospitalar;
-INSERT INTO gh_tblGeneros (descricao, data_cadastro) 
-VALUES ('Masculino', NOW()), ('Feminino', NOW());
+INSERT INTO gh_tblGeneros (descricao) 
+VALUES ('Masculino'), ('Feminino');
 
 -- Inserção de pacientes
-INSERT INTO gh_tblPacientes (id_paciente, nome, sobrenome, data_nascimento, id_genero, data_cadastro) 
+INSERT INTO gh_tblPacientes (nome, sobrenome, data_nascimento, id_genero, data_cadastro) 
 VALUES 
-(1, 'Fulano', 'Silva', '1971-08-12', 1, '2025-05-05 20:52:31'),
-(3, 'Fulano01', 'Silva01', '1971-08-12', 1, '2025-05-05 20:57:04'),
-(4, 'Fulano02', 'Silva02', '1971-08-12', 1, '2025-05-05 20:57:04'),
-(5, 'Fulano03', 'Silva03', '1971-08-12', 1, '2025-05-05 20:57:04'),
-(6, 'Fulano04', 'Silva04', '1971-08-12', 1, '2025-05-05 20:57:04'),
-(7, 'Fulano05', 'Silva05', '1971-08-12', 1, '2025-05-05 20:57:04');
+('Fulano', 'Silva', '1971-08-12', 1, '2025-05-05 20:52:31'),
+('Fulano01', 'Silva01', '1971-08-12', 1, '2025-05-05 20:57:04'),
+('Fulano02', 'Silva02', '1971-08-12', 1, '2025-05-05 20:57:04'),
+('Fulano03', 'Silva03', '1971-08-12', 1, '2025-05-05 20:57:04'),
+('Fulano04', 'Silva04', '1971-08-12', 1, '2025-05-05 20:57:04'),
+('Fulano05', 'Silva05', '1971-08-12', 1, '2025-05-05 20:57:04');
 
 -- Inserção de médicos
-INSERT INTO gh_tblMedicos (id_medico, nome, sobrenome, crm, uf, data_cadastro)
+INSERT INTO gh_tblMedicos (nome, sobrenome, crm, uf, data_cadastro)
 VALUES
-(1, 'Medico01', 'Medico01', 123456, 'SP', '2025-05-05 21:09:06'),
-(2, 'Medico02', 'Medico02', 234567, 'SP', '2025-05-05 21:09:07'),
-(3, 'Medico03', 'Medico03', 345678, 'SP', '2025-05-05 21:09:07'),
-(4, 'Medico04', 'Medico04', 456789, 'SP', '2025-05-05 21:09:07'),
-(5, 'Medico05', 'Medico05', 567890, 'SP', '2025-05-05 21:09:07'),
-(10, 'Medico01', 'Medico01', 123456, 'SP', '2025-05-05 21:46:58'),
-(11, 'Medico02', 'Medico02', 234567, 'SP', '2025-05-05 21:47:00');
+('Medico01', 'Medico01', 123456, 'SP', '2025-05-05 21:09:06'),
+('Medico02', 'Medico02', 234567, 'SP', '2025-05-05 21:09:07'),
+('Medico03', 'Medico03', 345678, 'SP', '2025-05-05 21:09:07'),
+('Medico04', 'Medico04', 456789, 'SP', '2025-05-05 21:09:07'),
+('Medico05', 'Medico05', 567890, 'SP', '2025-05-05 21:09:07'),
+('Medico06', 'Medico06', 678901, 'SP', '2025-05-05 21:46:58'),
+('Medico07', 'Medico07', 789012, 'SP', '2025-05-05 21:47:00');
 
 -- Inserção de exames
-INSERT INTO gh_tblExames (id_paciente, id_medico, diagnostico, data_exame, data_cadastro)
+INSERT INTO gh_tblExames (id_paciente, id_medico, diagnostico, data_exame)
 VALUES
-(1, 1, 'Exame de sangue realizado, resultados normais.', '2025-05-01 08:30:00', NOW()),
-(2, 2, 'Radiografia de tórax, sem anormalidades.', '2025-05-02 09:15:00', NOW()),
-(3, 3, 'Ultrassonografia abdominal, fígado saudável.', '2025-05-03 10:45:00', NOW()),
-(4, 4, 'Eletrocardiograma, sinais de ritmo cardíaco normal.', '2025-05-04 11:30:00', NOW()),
-(5, 5, 'Tomografia computadorizada, sem lesões detectadas.', '2025-05-05 13:00:00', NOW());
+(1, 1, 'Exame de sangue realizado, resultados normais.', '2025-05-01 08:30:00'),
+(2, 2, 'Radiografia de tórax, sem anormalidades.', '2025-05-02 09:15:00'),
+(3, 3, 'Ultrassonografia abdominal, fígado saudável.', '2025-05-03 10:45:00'),
+(4, 4, 'Eletrocardiograma, sinais de ritmo cardíaco normal.', '2025-05-04 11:30:00'),
+(5, 5, 'Tomografia computadorizada, sem lesões detectadas.', '2025-05-05 13:00:00');
 
 -- Inserção de prontuários
-INSERT INTO gh_tblProntuarios (id_paciente, descricao, data_cadastro) 
+-- Atenção: paciente id 7 não existe (verificar antes de executar ou ajustar dados)
+INSERT INTO gh_tblProntuarios (id_paciente, descricao) 
 VALUES 
-(3, 'Paciente realizou exames de rotina.', NOW()),
-(4, 'Paciente realizou exames de rotina.', NOW()),
-(5, 'Paciente realizou exames de rotina.', NOW()),
-(6, 'Paciente realizou exames de rotina.', NOW()),
-(7, 'Paciente realizou exames de rotina.', NOW());
+(3, 'Paciente realizou exames de rotina.'),
+(4, 'Paciente realizou exames de rotina.'),
+(5, 'Paciente realizou exames de rotina.'),
+(6, 'Paciente realizou exames de rotina.');
+-- Removido o paciente 7, pois ele não foi previamente inserido
+
