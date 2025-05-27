@@ -72,8 +72,24 @@ INNER JOIN gh_tblexames                         -- Faz junção com a tabela de 
 
 -- SCRIPT DO PROFESSOR 
 
+USE gestao_hospitalar
 SELECT * FROM gh_tblpacientes
 INNER JOIN gh_tblgeneros ON gh_tblpacientes.id_genero = gh_tblgeneros.id_genero
 INNER JOIN gh_tblexames ON gh_tblpacientes.id_paciente = gh_tblexames.id_paciente;
 
 
+USE gestao_hospitalar;
+SELECT * FROM gh_tblpacientes
+INNER JOIN gh_tblgeneros ON gh_tblpacientes.id_genero = gh_tblgeneros.id_genero
+INNER JOIN gh_tblexames ON gh_tblpacientes.id_paciente = gh_tblexames.id_paciente
+WHERE gh_tblpacientes.nome like '%a%'
+
+-- TODOS OS MÉDICOS que tem exames 
+USE gestao_hospitalar;
+SELECT * FROM gh_tblmedicos
+INNER JOIN gh_tblexames ON gh_tblmedicos.id_medico = gh_tblexames.id_medico;
+
+-- TODOS OS MÉDICOS 
+USE gestao_hospitalar;
+SELECT * FROM gh_tblmedicos
+LEFT JOIN gh_tblexames ON gh_tblmedicos.id_medico = gh_tblexames.id_medico;
