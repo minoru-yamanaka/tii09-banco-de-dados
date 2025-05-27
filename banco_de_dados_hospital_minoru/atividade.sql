@@ -47,8 +47,8 @@ INNER JOIN gh_tblprontuarios ON gh_tblpacientes.id_paciente = gh_tblprontuarios.
 
 --- VAMOS PRATICAR 
 
-MONTAR UMA CONSULTA QUE TRAGA OS EXAMES DE PACIENTES E SEUS GENEROS 
-PACIENTES (ID_PACIENTE) (ID_GENERO) / EXAMES (ID_PACIENTE) / GENEROS (ID_GENERO)
+-- MONTAR UMA CONSULTA QUE TRAGA OS EXAMES DE PACIENTES E SEUS GENEROS 
+-- PACIENTES (ID_PACIENTE) (ID_GENERO) / EXAMES (ID_PACIENTE) / GENEROS (ID_GENERO)
 
 USE gestao_hospitalar;
 
@@ -70,7 +70,10 @@ INNER JOIN gh_tblexames                         -- Faz junção com a tabela de 
 |-------------|----------|-----------|------------|----------|------------------------------------------------|
 |      1      |  Fulano  |   Silva   | Masculino  |    1     | Exame de sangue realizado, resultados normais. |
 
+-- SCRIPT DO PROFESSOR 
 
-
+SELECT * FROM gh_tblpacientes
+INNER JOIN gh_tblgeneros ON gh_tblpacientes.id_genero = gh_tblgeneros.id_genero
+INNER JOIN gh_tblexames ON gh_tblpacientes.id_paciente = gh_tblexames.id_paciente;
 
 
