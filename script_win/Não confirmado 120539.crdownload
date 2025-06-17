@@ -1,0 +1,19 @@
+@echo off
+REM Script de Backup Completo - MySQL (Windows)
+
+REM Configurações
+set DATA=%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%
+set DESTINO=C:\backups
+set ARQUIVO=%DESTINO%\backup_%DATA%.sql
+set USUARIO=root
+set SENHA=
+
+REM Criação do diretório
+if not exist %DESTINO% mkdir %DESTINO%
+
+REM Execução do backup
+mysqldump -u %USUARIO% -p%SENHA% --all-databases > %ARQUIVO%
+
+REM Compactação do arquivo (requer 7zip instalado e configurado no PATH)
+7z a %ARQUIVO%.7z %ARQUIVO%
+del %ARQUIVO%

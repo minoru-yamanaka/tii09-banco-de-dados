@@ -1,0 +1,58 @@
+Atividade.
+
+Desenhe um MER para o seguinte cenário: Uma escola deseja armazenar informações sobre seus professores e as disciplinas que eles lecionam. Um professor pode dar várias disciplinas, e uma disciplina pode ser dada por vários professores. 
+
+· Identifique as entidades, atributos e relacionamentos. 
+· Determine a cardinalidade entre as entidades.
+
+O diagrama MER representa o relacionamento entre Professor e Disciplina por meio da entidade Leciona.
+
+Estrutura do MER:
+
+Entidades principais:
+
+- Professor: representa os docentes da escola.
+- Disciplina: representa as matérias ensinadas.
+
+Relacionamento:
+
+- Leciona: conecta Professor e Disciplina, indicando que um professor pode lecionar várias disciplinas, e uma disciplina pode ser lecionada por vários professores (cardinalidade N:N).
+
+Atributos:
+- Professor: ID do Professor, Nome do Professor, Área de Especialização.
+- Disciplina: ID da Disciplina, Nome da Disciplina, Carga Horária.
+- Leciona: Pode conter atributos como período, turma ou nível de ensino.
+
+O modelo segue uma estrutura normalizada, permitindo representar corretamente a relação muitos-para-muitos. Caso queira adicionar mais detalhes, como turmas ou horários, podemos expandir o modelo com mais entidades e atributos.
+
+[Professor] ------- N -------< Leciona >------- N ------- [Disciplina]
+     |                                      			 |
+     |                                      		 	 |
+   (ID do Professor)                       		(ID da Disciplina)
+   (Nome do Professor)			    	          	(Nome da Disciplina)
+   (Área de Especialização)                		(Carga Horária)
+
+
+---
+
+CREATE TABLE professores (
+ id_professor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(20),
+    formacao VARCHAR(20)
+);
+
+CREATE TABLE disciplinas (
+ id_disciplina  INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(30),
+    carga_horaria INT
+);
+
+CREATE TABLE professores_disciplinas(
+ id_professor_disciplina  INT PRIMARY KEY AUTO_INCREMENT,
+    id_professor INT,
+    id_disciplina INT,
+    semestre INT,
+    ano INT,
+    foreign key (id_professor) REFERENCES professores(id_professor),
+    foreign key (id_disciplina) REFERENCES disciplinas(id_disciplina)
+);

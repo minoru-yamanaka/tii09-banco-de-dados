@@ -1,0 +1,12 @@
+@echo off
+REM Backup Incremental com Binlogs - Windows
+
+REM Configurações
+set BINLOG_DIR=C:\backups\binlogs
+set MYSQL_BINLOG_PATH=C:\ProgramData\MySQL\MySQL Server 8.0\Data
+
+REM Criação do diretório
+if not exist %BINLOG_DIR% mkdir %BINLOG_DIR%
+
+REM Copiar os arquivos binlog
+xcopy /Y /Q %MYSQL_BINLOG_PATH%\mysql-bin.* %BINLOG_DIR%

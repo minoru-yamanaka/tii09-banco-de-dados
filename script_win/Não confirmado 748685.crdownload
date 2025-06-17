@@ -1,0 +1,10 @@
+@echo off
+REM Script de Restauração MySQL a partir de Dump (.sql)
+
+REM Configurações
+set ARQUIVO=C:\backups\backup_RESTAURAR.sql
+set USUARIO=root
+set SENHA=SENHA_AQUI
+
+REM Restaurar o arquivo
+mysql -u %USUARIO% -p%SENHA% < %ARQUIVO%
